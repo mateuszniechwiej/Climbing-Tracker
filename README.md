@@ -12,5 +12,5 @@ Personal React app to log indoor sessions (grades, dates), track progress. Built
 
 ## Local Setup
 ```bash
-npm i
+npm i # npm install
 npm run dev -- --host
