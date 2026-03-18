@@ -4,11 +4,25 @@ Personal React app to log indoor sessions (grades, dates), track progress. Built
 ## Status
 🚧 In Progress (March 2026) – MVP target: 1 week.
 
+## File Structure
+src/
+├── components/
+│ ├── AddSession.jsx # Form inputs
+│ ├── SessionList.jsx # Badge display
+│ └── Stats.jsx # Later
+├── App.jsx # State hub
+├── index.css # Tailwind
+└── main.jsx
+
 ## Features Plan
-- [ ] Log form (grade/date/notes) – useState
-- [ ] Session list + totals – useEffect/localStorage
-- [ ] Stats (climbs/week) – useReducer
-- [ ] Deploy Vercel
+| Step | Feature | Status |
+|------|---------|--------|
+| 1 | useState sessions array | ✅ Done |
+| 2 | AddSession form | ⏳ Next |
+| 3 | localStorage persist | ⏳ |
+| 4 | Grade colors (gym board) | ✅ Partial |
+| 5 | Stats (total climbs) | ⏳ |
+| 6 | Vercel deploy | ⏳ |
 
 ## Local Setup
 ```bash
