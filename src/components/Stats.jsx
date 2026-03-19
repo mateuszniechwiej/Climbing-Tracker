@@ -19,8 +19,16 @@ export default function Stats({ sessions }) {
   const totalClimbs = filteredSessions.reduce((total, session) => total + session.count, 0);
 
   const parseDuration = (durationStr) => {
-    const [hrs, mins] = durationStr.split('h :').map(part => parseInt(part.replace('m', '')));
-    return (hrs * 60) + mins;
+    if (!durationStr || typeof durationStr !== 'string') return 0;
+
+    // Expecting format like "1h :30m" (from AddSession)
+    const match = durationStr.match(/^(\d+)\s*h\s*:\s*(\d+)\s*m$/);
+    if (!match) return 0;
+
+    const hrs = parseInt(match[1], 10) || 0;
+    const mins = parseInt(match[2], 10) || 0;
+
+    return hrs * 60 + mins;
   };
 
   const totalDuration = filteredSessions.reduce((total, session) => {
@@ -41,6 +49,8 @@ export default function Stats({ sessions }) {
   // Calculate duration per month for filtered sessions
   const monthlyDurations = filteredSessions.reduce((acc, session) => {
     const date = new Date(session.date);
+    if (Number.isNaN(date.getTime())) return acc; // skip invalid dates
+
     const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
     const durationMins = parseDuration(session.duration);
 
@@ -54,7 +64,7 @@ export default function Stats({ sessions }) {
   const sortedMonths = Object.keys(monthlyDurations).sort();
 
   return (
-    <div className="p-4 border border-gray-300 rounded-md shadow-sm m-4">
+    <div className="p-4 border border-gray-300 rounded-md shadow-sm mt-2">
       <h2 className="text-xl font-bold m-4">Stats</h2>
 
       {/* Date Range Filter */}
@@ -97,7 +107,7 @@ export default function Stats({ sessions }) {
             </button>
         </div>
         {(startDate || endDate) && (
-          <p className="text-xs text-gray-500 mt-">
+          <p className="text-xs text-gray-500 mt-2">
             Showing stats for {filteredSessions.length} of {sessions.length} sessions
           </p>
         )}
@@ -116,6 +126,9 @@ export default function Stats({ sessions }) {
           <div className="space-y-2">
             {Object.entries(
               filteredSessions.reduce((acc, session) => {
+                const dateObj = new Date(session.date);
+                if (Number.isNaN(dateObj.getTime())) return acc; // skip invalid dates
+
                 const dayKey = session.date;
                 const durationMins = parseDuration(session.duration);
                 acc[dayKey] = (acc[dayKey] || 0) + durationMins;

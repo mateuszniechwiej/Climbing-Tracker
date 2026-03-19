@@ -5,22 +5,23 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import AddSession from './components/AddSession'
 import SessionList from './components/SessionList'
-import Stats from './components/Stats'
+import Stats from './components/Stats';
+import usePersistentSessions from './hooks/usePersistentSessions';
 
 function App() {
-  const [sessions, setSessions] = useState([]);
+  const [sessions, saveSession, deleteSession] = usePersistentSessions();
 
-  const addSession = (formData) => {  // ← Fixed param
-    console.log('Added:', formData);  // Debug
-    setSessions([...sessions, { 
-      id: sessions.length + 1, 
+  const handleAddSession = (formData) => {
+    const newSession = {
       color: formData.color,
       gradeDifficulty: formData.gradeDifficulty,
       count: formData.count,
       date: formData.date,
       duration: formData.duration,
       notes: formData.notes || ''
-    }]);
+    };
+
+    saveSession(newSession);
   };
 
   return (
@@ -28,9 +29,9 @@ function App() {
       <h1 className="text-3xl font-bold mb-4">Climbing Tracker</h1>
       <p className="mb-4">Total: {sessions.length}</p>
 
-      <AddSession onAdd={addSession} />
+      <AddSession onAdd={handleAddSession} />
       <Stats sessions={sessions} />
-      <SessionList sessions={sessions} />
+      <SessionList sessions={sessions} onDelete={deleteSession} />
     </div>
   );
 }

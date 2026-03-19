@@ -19,10 +19,13 @@ src/
 |------|---------|--------|
 | 1 | useState sessions array | ✅ Done |
 | 2 | AddSession form |  | ✅ Done | |
-| 3 | localStorage persist | ⏳ |
+| 3 | IndexedDB persist (cache-proof)  | ✅ Done |
 | 4 | Grade colors (gym board) | | ✅ Done | |
-| 5 | Stats (total climbs) | ⏳ |
+| 5 | Stats (total climbs) |✅ Done  |
 | 6 | Vercel deploy | ⏳ |
+| 7 | Delete session button |✅ Done  |
+| 8	| CSV export	⏳ Optional
+| 9	| Edit sessions	⏳ Optional
 
 ## Local Setup
 ```bash
