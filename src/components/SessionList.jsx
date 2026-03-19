@@ -3,15 +3,17 @@ export default function SessionList({ sessions, onDelete }) {
     <div className="space-y-4 mt-2">
       {sessions.map((session, index) => (
         <div key={index} className="p-4 border border-gray-300 rounded-md shadow-sm">
-          <p>
-            <strong>Color:</strong> {session.color}
-          </p>
-          <p>
-            <strong>Grade Difficulty:</strong> {session.gradeDifficulty}
-          </p>
-          <p>
-            <strong>Count:</strong> {session.count}
-          </p>
+          <div className="mb-2">
+            <strong>Climbs:</strong>
+            <ul className="list-disc list-inside ml-4">
+              {session.climbs?.map((climb, i) => (
+                <li key={i}>
+                  {climb.color} - {climb.gradeDifficulty} - {climb.count} climbs
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <p>
             <strong>Date:</strong> {session.date}
           </p>

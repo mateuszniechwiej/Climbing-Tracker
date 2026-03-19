@@ -16,7 +16,9 @@ export default function Stats({ sessions }) {
     return true;
   });
 
-  const totalClimbs = filteredSessions.reduce((total, session) => total + session.count, 0);
+  const totalClimbs = filteredSessions.reduce((total, session) => {
+    return total + (session.climbs?.reduce((sum, climb) => sum + parseInt(climb.count || 0), 0) || 0);
+  }, 0);
 
   const parseDuration = (durationStr) => {
     if (!durationStr || typeof durationStr !== 'string') return 0;
@@ -42,9 +44,18 @@ export default function Stats({ sessions }) {
   };
 
   // Count color sessions
-  const pinkCount = filteredSessions.filter(session => session.color === 'Pink').length;
-  const blackCount = filteredSessions.filter(session => session.color === 'Black').length;
-  const blueCount = filteredSessions.filter(session => session.color === 'Blue').length;
+  const colorCounts = filteredSessions.reduce((acc, session) => {
+    session.climbs?.forEach(climb => {
+      if (climb.color) {
+        acc[climb.color] = (acc[climb.color] || 0) + 1;
+      }
+    });
+    return acc;
+  }, {});
+
+  const pinkCount = colorCounts.Pink || 0;
+  const blackCount = colorCounts.Black || 0;
+  const blueCount = colorCounts.Blue || 0;
 
   // Calculate duration per month for filtered sessions
   const monthlyDurations = filteredSessions.reduce((acc, session) => {

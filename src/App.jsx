@@ -13,9 +13,7 @@ function App() {
 
   const handleAddSession = (formData) => {
     const newSession = {
-      color: formData.color,
-      gradeDifficulty: formData.gradeDifficulty,
-      count: formData.count,
+      climbs: formData.climbs,
       date: formData.date,
       duration: formData.duration,
       notes: formData.notes || ''
