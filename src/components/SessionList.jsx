@@ -7,6 +7,7 @@ export default function SessionList({ sessions }) {
           <p><strong>Grade Difficulty:</strong> {session.gradeDifficulty}</p>
           <p><strong>Count:</strong> {session.count}</p>
           <p><strong>Date:</strong> {session.date}</p>
+          <p><strong>Duration:</strong> {session.duration}</p>
           <p><strong>Notes:</strong> {session.notes}</p>
         </div>
       ))}

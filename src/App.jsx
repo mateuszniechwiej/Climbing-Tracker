@@ -17,6 +17,7 @@ function App() {
       gradeDifficulty: formData.gradeDifficulty,
       count: formData.count,
       date: formData.date,
+      duration: formData.duration,
       notes: formData.notes || ''
     }]);
   };

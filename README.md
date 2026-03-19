@@ -18,9 +18,9 @@ src/
 | Step | Feature | Status |
 |------|---------|--------|
 | 1 | useState sessions array | ✅ Done |
-| 2 | AddSession form | ⏳ Next |
+| 2 | AddSession form |  | ✅ Done | |
 | 3 | localStorage persist | ⏳ |
-| 4 | Grade colors (gym board) | ✅ Partial |
+| 4 | Grade colors (gym board) | | ✅ Done | |
 | 5 | Stats (total climbs) | ⏳ |
 | 6 | Vercel deploy | ⏳ |
 

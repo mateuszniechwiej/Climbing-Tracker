@@ -1,24 +1,29 @@
 import { useState } from "react";
 
 export default function AddSession({ onAdd }) {
+
   const [formData, setFormData] = useState({
     color: '',
     gradeDifficulty: '',
     count: '',
     date: '',
+    durationHrs: '',
+    durationMins: '',
     notes: ''       
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const duration = `${formData.durationHrs || 0}h :${formData.durationMins || '00'}m`;
     onAdd({
         color: formData.color,
         count: parseInt(formData.count),
         date: formData.date,
         notes: formData.notes,
-        gradeDifficulty: formData.gradeDifficulty
+        gradeDifficulty: formData.gradeDifficulty,
+        duration: duration
     });
-    setFormData({ color: '', gradeDifficulty: '', count: '', date: '', notes: '' });  // Reset
+    setFormData({ color: '', gradeDifficulty: '', count: '', date: '', durationHrs: '', durationMins: '', notes: '' });  // Reset
   };
 
   const gradeColors = [
@@ -92,6 +97,29 @@ export default function AddSession({ onAdd }) {
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Duration
+          </label>
+          <div className="flex gap-2">
+            <select
+              value={formData.durationHrs}
+              onChange={(e) => setFormData({ ...formData, durationHrs: e.target.value })}
+              className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+            >
+              <option value="">0h</option>
+              {[1,2,3,4,5,6,7,8].map(h => <option key={h} value={h}>{h}h</option>)}
+            </select>
+            <select
+              value={formData.durationMins}
+              onChange={(e) => setFormData({ ...formData, durationMins: e.target.value })}
+              className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+            >
+              <option value="">0m</option>
+              {[5,15,30,45].map(m => <option key={m} value={m.toString().padStart(2, '0')}>{m}m</option>)}
+            </select>
+          </div>
         </div>
         <div>
           <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
