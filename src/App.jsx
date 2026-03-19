@@ -5,6 +5,7 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import AddSession from './components/AddSession'
 import SessionList from './components/SessionList'
+import Stats from './components/Stats'
 
 function App() {
   const [sessions, setSessions] = useState([]);
@@ -28,6 +29,7 @@ function App() {
       <p className="mb-4">Total: {sessions.length}</p>
 
       <AddSession onAdd={addSession} />
+      <Stats sessions={sessions} />
       <SessionList sessions={sessions} />
     </div>
   );
