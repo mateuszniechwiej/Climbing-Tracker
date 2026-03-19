@@ -141,8 +141,8 @@ export default function AddSession({ onAdd }) {
             className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
             required
           >
-            <option value="">0h</option>
-            {[1,2,3,4,5,6,7,8].map(h => <option key={h} value={h}>{h}h</option>)}
+            <option value="">--</option>
+            {[0,1,2,3,4,5,6,7,8].map(h => <option key={h} value={h}>{h}h</option>)}
           </select>
           <select
             value={formData.durationMins}
@@ -150,8 +150,8 @@ export default function AddSession({ onAdd }) {
             className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
             required
           >
-            <option value="">0m</option>
-            {[5,15,30,45].map(m => <option key={m} value={m.toString().padStart(2, '0')}>{m}m</option>)}
+            <option value="">--</option>
+            {[0,15,30,45].map(m => <option key={m} value={m.toString().padStart(2, '0')}>{m}m</option>)}
           </select>
         </div>
       </div>
