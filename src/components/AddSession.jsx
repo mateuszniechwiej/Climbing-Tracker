@@ -15,13 +15,14 @@ export default function AddSession({ onAdd }) {
         color: formData.color,
         count: parseInt(formData.count),
         date: formData.date,
-        notes: formData.notes
+        notes: formData.notes,
+        gradeDifficulty: formData.gradeDifficulty
     });
     setFormData({ color: '', gradeDifficulty: '', count: '', date: '', notes: '' });  // Reset
   };
 
   const gradeColors = [
-
+    'Murple', 'Flags', 'Pink', 'Black', 'Blue', 'Red', 'Yellow'
 
   ]
 
@@ -35,14 +36,20 @@ export default function AddSession({ onAdd }) {
           <label htmlFor="color" className="block text-sm font-medium text-gray-700">
             Color
           </label>
-          <input
-            type="text"
+          <select
             id="color"
             value={formData.color}
             onChange={(e) => setFormData({ ...formData, color: e.target.value })}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             required
-          />
+          >
+            <option value="">Select Color</option>
+            {gradeColors.map((color) => (
+              <option key={color} value={color}>
+                {color}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <label htmlFor="gradeDifficulty" className="block text-sm font-medium text-gray-700">
