@@ -125,6 +125,7 @@ export default function Stats({ sessions }) {
       </div>
 
       <div className="space-y-2">
+        <p><strong>Total Sessions:</strong> {filteredSessions.length}</p>
         <p><strong>Total Climbs:</strong> {totalClimbs}</p>
         <p><strong>Total Duration:</strong> {formatDuration(totalDuration)}</p>
         {pinkCount > 0 && <p><strong>Pink grades climbed:</strong> {pinkCount}</p>}

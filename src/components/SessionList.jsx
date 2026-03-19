@@ -1,10 +1,11 @@
 export default function SessionList({ sessions, onDelete }) {
   return (
     <div className="space-y-4 mt-2">
+      <h3 className="text-lg font-semibold">Number of Sessions: {sessions.length}</h3>
       {sessions.map((session, index) => (
         <div key={index} className="p-4 border border-gray-300 rounded-md shadow-sm">
           <div className="mb-2">
-            <strong>Climbs:</strong>
+            <strong>Number of Climbs:</strong>
             <ul className="list-disc list-inside ml-4">
               {session.climbs?.map((climb, i) => (
                 <li key={i}>
