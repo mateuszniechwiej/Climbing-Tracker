@@ -28,7 +28,7 @@ src/
 | 5 | Stats (total climbs) | ✅ Done |
 | 6 | Vercel deploy | ✅ Done |
 | 7 | Delete session button | ✅ Done |
-| 8 | CSV export | ⏳ Optional |
+| 8 | CSV export | ✅ Done |
 | 9 | Edit sessions | ⏳ Optional |
 
 ## Local Setup
