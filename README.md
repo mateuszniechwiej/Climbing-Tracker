@@ -2,7 +2,11 @@
 Personal React app to log indoor sessions (grades, dates), track progress. Built to master hooks while serving my gym routine.
 
 ## Status
-🚧 In Progress (March 2026) – MVP target: 1 week.
+✅ Deployed (March 2026)
+
+## Deployment
+- **Vercel**: https://climbing-tracker-red.vercel.app/
+- **GitHub Repository**: https://github.com/mateuszniechwiej/Climbing-Tracker
 
 ## File Structure
 src/
@@ -18,14 +22,14 @@ src/
 | Step | Feature | Status |
 |------|---------|--------|
 | 1 | useState sessions array | ✅ Done |
-| 2 | AddSession form |  | ✅ Done | |
-| 3 | IndexedDB persist (cache-proof)  | ✅ Done |
-| 4 | Grade colors (gym board) | | ✅ Done | |
-| 5 | Stats (total climbs) |✅ Done  |
-| 6 | Vercel deploy | ⏳ |
-| 7 | Delete session button |✅ Done  |
-| 8	| CSV export	⏳ Optional
-| 9	| Edit sessions	⏳ Optional
+| 2 | AddSession form | ✅ Done |
+| 3 | IndexedDB persist (cache-proof) | ✅ Done |
+| 4 | Grade colors (gym board) | ✅ Done |
+| 5 | Stats (total climbs) | ✅ Done |
+| 6 | Vercel deploy | ✅ Done |
+| 7 | Delete session button | ✅ Done |
+| 8 | CSV export | ⏳ Optional |
+| 9 | Edit sessions | ⏳ Optional |
 
 ## Local Setup
 ```bash
