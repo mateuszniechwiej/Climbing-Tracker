@@ -43,5 +43,16 @@ export default function usePersistentSessions() {
         }
     };
 
-    return [sessions, saveSession, deleteSession];
+    const updateSession = async (updatedSession) => {
+        try {
+            const db = await openDB('ClimbTracker', 1);
+            await db.put('sessions', updatedSession);
+            setSessions(prev => prev.map(s => s.id === updatedSession.id ? updatedSession : s));
+        } catch (error) {
+            console.log('Update skipped (dev)');
+        }
+    };
+        
+    return [sessions, saveSession, deleteSession, updateSession];
+      
 }

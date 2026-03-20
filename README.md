@@ -28,10 +28,21 @@ src/
 | 5 | Stats (total climbs) | ✅ Done |
 | 6 | Vercel deploy | ✅ Done |
 | 7 | Delete session button | ✅ Done |
-| 8 | CSV export | ✅ Done |
-| 9 | Edit sessions | ⏳ Optional |
+| 8 | CSV export and import| ✅ Done |
+| 9 | Edit sessions | ✅ Done |
 
 ## Local Setup
 ```bash
 npm i # npm install
 npm run dev -- --host
+```
+
+## Deployment
+github - 
+```bash 
+npm run deploy
+
+```
+vercel - 
+```bash
+vercel --prod
