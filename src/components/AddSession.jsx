@@ -11,7 +11,7 @@ export default function AddSession({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const duration = `${formData.durationHrs || 0}h :${formData.durationMins || '00'}m`;
+    const duration = (parseInt(formData.durationHrs || 0) * 60) + parseInt(formData.durationMins || 0);
     onAdd({
       climbs: formData.climbs.filter(climb => climb.color && climb.gradeDifficulty && climb.count),
       date: formData.date,

@@ -22,21 +22,10 @@ export default function Stats({ sessions }) {
     return total + (session.climbs?.reduce((sum, climb) => sum + parseInt(climb.count || 0), 0) || 0);
   }, 0);
 
-  const parseDuration = (durationStr) => {
-    if (!durationStr || typeof durationStr !== 'string') return 0;
 
-    // Expecting format like "1h :30m" (from AddSession)
-    const match = durationStr.match(/^(\d+)\s*h\s*:\s*(\d+)\s*m$/);
-    if (!match) return 0;
-
-    const hrs = parseInt(match[1], 10) || 0;
-    const mins = parseInt(match[2], 10) || 0;
-
-    return hrs * 60 + mins;
-  };
 
   const totalDuration = filteredSessions.reduce((total, session) => {
-    return total + parseDuration(session.duration);
+    return total + (session.duration || 0);
   }, 0);
 
   const formatDuration = (totalMins) => {
@@ -65,7 +54,7 @@ export default function Stats({ sessions }) {
     if (Number.isNaN(date.getTime())) return acc; // skip invalid dates
 
     const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-    const durationMins = parseDuration(session.duration);
+    const durationMins = session.duration || 0;
 
     if (!acc[monthKey]) {
       acc[monthKey] = 0;
@@ -85,7 +74,7 @@ export default function Stats({ sessions }) {
         <h3 className="text-sm font-semibold mb-2">Filter by Date Range:</h3>
         <div className="space-y-3 mb-2">
           <div className="flex justify-center">
-            
+
           </div>
           <div className="flex gap-4">
             <div className="flex-1">
@@ -110,14 +99,14 @@ export default function Stats({ sessions }) {
             </div>
           </div>
           <button
-              onClick={() => {
-                setStartDate('');
-                setEndDate('');
-              }}
-              className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300 rounded transition-colors duration-200"
-            >
-              Clear
-            </button>
+            onClick={() => {
+              setStartDate('');
+              setEndDate('');
+            }}
+            className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300 rounded transition-colors duration-200"
+          >
+            Clear
+          </button>
         </div>
         {(startDate || endDate) && (
           <p className="text-xs text-gray-500 mt-2">
@@ -144,7 +133,7 @@ export default function Stats({ sessions }) {
                 if (Number.isNaN(dateObj.getTime())) return acc; // skip invalid dates
 
                 const dayKey = session.date;
-                const durationMins = parseDuration(session.duration);
+                const durationMins = session.duration || 0;
                 acc[dayKey] = (acc[dayKey] || 0) + durationMins;
                 return acc;
               }, {})
