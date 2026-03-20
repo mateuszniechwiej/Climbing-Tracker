@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import useCsvExport from '../hooks/useCsvExport';
 
 export default function Stats({ sessions }) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const { exportCsv } = useCsvExport(sessions);
 
   // Filter sessions by date range
   const filteredSessions = sessions.filter(session => {
@@ -171,6 +173,15 @@ export default function Stats({ sessions }) {
           <p className="text-sm text-gray-500">No sessions in selected range</p>
         )}
       </div>
+      <div className="mt-6">
+        <button
+          onClick={exportCsv}
+          className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm"
+        >
+          📥 Export CSV
+        </button>
+      </div>
+      {/* existing stats grid */}
     </div>
   );
 }
