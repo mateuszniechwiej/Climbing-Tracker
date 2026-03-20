@@ -28,7 +28,7 @@ function App() {
       <p className="mb-4">Total: {sessions.length}</p>
 
       <AddSession onAdd={handleAddSession} />
-      <Stats sessions={sessions} />
+      <Stats sessions={sessions} saveSession={saveSession} />
       <SessionList sessions={sessions} onDelete={deleteSession} />
     </div>
   );

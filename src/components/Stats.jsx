@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import useCsvExport from '../hooks/useCsvExport';
+import useCsvImport from '../hooks/useCsvImport';
+import { Download, Upload } from 'lucide-react';
 
-export default function Stats({ sessions }) {
+
+export default function Stats({ sessions, saveSession }) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const { exportCsv } = useCsvExport(sessions);
+  const { importCsv } = useCsvImport(saveSession);
 
   // Filter sessions by date range
   const filteredSessions = sessions.filter(session => {
@@ -31,7 +35,7 @@ export default function Stats({ sessions }) {
   const formatDuration = (totalMins) => {
     const hrs = Math.floor(totalMins / 60);
     const mins = totalMins % 60;
-    return `${hrs}h :${mins.toString().padStart(2, '0')}m`;
+    return `${hrs}h ${mins.toString().padStart(2, '0')}m`;
   };
 
   // Count color sessions
@@ -162,14 +166,21 @@ export default function Stats({ sessions }) {
           <p className="text-sm text-gray-500">No sessions in selected range</p>
         )}
       </div>
-      <div className="mt-6">
-        <button
-          onClick={exportCsv}
-          className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm"
-        >
-          📥 Export CSV
-        </button>
-      </div>
+      <div className="mt-4 flex gap-3 justify-center">
+  <label className="cursor-pointer px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2">
+    <Download size={16} />
+    Import Sessions(Csv)
+    <input type="file" accept=".csv" className="hidden" onChange={(e) => importCsv(e.target.files[0])} />
+  </label>
+  <button
+    onClick={exportCsv}
+    className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2"
+  >
+    <Upload size={16} />
+    Export Sessions(Csv)
+  </button>
+</div>
+
       {/* existing stats grid */}
     </div>
   );
