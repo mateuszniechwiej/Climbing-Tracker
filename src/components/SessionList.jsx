@@ -1,19 +1,36 @@
 import { Pencil, Trash2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-export default function SessionList({ sessions, onDelete, onEdit }) {
+export default function SessionList({ sessions, allSessions, onDelete, onEdit, selectedColor, onColorFilter }) {
 
   const listRef = useRef(null);
   const isFirstRender = useRef(true);
 
+  const uniqueColors = [
+    ...new Set(
+      allSessions.flatMap(s => s.climbs || [])
+        .map(c => c.color)
+    )
+  ];
+
   useEffect(() => {
-  if (isFirstRender.current) {
-    isFirstRender.current = false;
-    return;
-  }
-  listRef.current?.scrollIntoView({ behavior: 'smooth' });
-}, [sessions]);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    listRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [sessions]);
   return (
     <div ref={listRef} className="space-y-4 mt-2">
+     <select
+        value={selectedColor ?? ""}
+        onChange={(e) => onColorFilter(e.target.value || null)}
+        className="mb-4 p-2 border border-gray-300 rounded-md"
+    >
+        <option value="">All Sessions</option>
+        {uniqueColors.map(color => (
+          <option key={color} value={color}>{color}</option>
+        ))}
+     </select>
       <h3 className="text-lg font-semibold">Number of Sessions: {sessions.length}</h3>
       {sessions.map((session) => (
         <div key={session.id} className="p-4 border border-gray-300 rounded-md shadow-sm">

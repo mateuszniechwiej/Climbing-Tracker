@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 
 export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit }) {
 
-  console.log('AddSession render, editSession:', editSession);  // ← add here
-
   const isEditing = !!editSession;
 
   const [formData, setFormData] = useState(
