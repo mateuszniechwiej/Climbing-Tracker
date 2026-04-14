@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCsvExport from '../hooks/useCsvExport';
 import useCsvImport from '../hooks/useCsvImport';
 import { Download, Upload } from 'lucide-react';
@@ -9,6 +9,27 @@ export default function Stats({ sessions, saveSession }) {
   const [endDate, setEndDate] = useState('');
   const { exportCsv } = useCsvExport(sessions);
   const { importCsv } = useCsvImport(saveSession);
+  const [streak, setStreak] = useState(0);
+  const today = new Date().toISOString().slice(0, 10);
+
+  useEffect(() => {
+    const sessionDates = sessions
+      .map(s => new Date(s.date).toISOString().slice(0, 10))  // Normalize ALL
+      .filter((d, i, arr) => arr.indexOf(d) === i)  // Unique
+      .sort((a, b) => new Date(b) - new Date(a));  // Recent first
+
+    let currentStreak = 0;
+    for (let i = sessionDates.length; i++;) {
+      const expectedDate = new Date(new Date(today) - currentStreak * 86400000).toISOString().slice(0, 10);
+      if (sessionDates[i] === expectedDate) {
+        currentStreak++;
+      } else {
+        break;
+      }
+    }
+    setStreak(currentStreak);
+  }, [sessions]);
+
 
   // Filter sessions by date range
   const filteredSessions = sessions.filter(session => {
@@ -72,7 +93,7 @@ export default function Stats({ sessions, saveSession }) {
   return (
     <div className="p-4 border border-gray-300 rounded-md shadow-sm mt-2">
       <h2 className="text-xl font-bold m-4">Stats</h2>
-
+      <h3 className="text-lg font-semibold mb-2">Streak: {streak} days</h3>
       {/* Date Range Filter */}
       <div className="mb-4 p-3 bg-gray-50 rounded-lg">
         <h3 className="text-sm font-semibold mb-2">Filter by Date Range:</h3>
@@ -167,19 +188,19 @@ export default function Stats({ sessions, saveSession }) {
         )}
       </div>
       <div className="mt-4 flex gap-3 justify-center">
-  <label className="cursor-pointer px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2">
-    <Download size={16} />
-    Import Sessions(Csv)
-    <input type="file" accept=".csv" className="hidden" onChange={(e) => importCsv(e.target.files[0])} />
-  </label>
-  <button
-    onClick={exportCsv}
-    className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2"
-  >
-    <Upload size={16} />
-    Export Sessions(Csv)
-  </button>
-</div>
+        <label className="cursor-pointer px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2">
+          <Download size={16} />
+          Import Sessions(Csv)
+          <input type="file" accept=".csv" className="hidden" onChange={(e) => importCsv(e.target.files[0])} />
+        </label>
+        <button
+          onClick={exportCsv}
+          className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2"
+        >
+          <Upload size={16} />
+          Export Sessions(Csv)
+        </button>
+      </div>
 
       {/* existing stats grid */}
     </div>
