@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useCsvExport from '../hooks/useCsvExport';
 import useCsvImport from '../hooks/useCsvImport';
+import useClimbingStats from '../hooks/useClimbingStats';
 import { Download, Upload } from 'lucide-react';
 
 
@@ -9,27 +10,8 @@ export default function Stats({ sessions, saveSession }) {
   const [endDate, setEndDate] = useState('');
   const { exportCsv } = useCsvExport(sessions);
   const { importCsv } = useCsvImport(saveSession);
-  const [streak, setStreak] = useState(0);
+  const { streak } = useClimbingStats(sessions);
   const today = new Date().toISOString().slice(0, 10);
-
-  useEffect(() => {
-    const sessionDates = sessions
-      .map(s => new Date(s.date).toISOString().slice(0, 10))  // Normalize ALL
-      .filter((d, i, arr) => arr.indexOf(d) === i)  // Unique
-      .sort((a, b) => new Date(b) - new Date(a));  // Recent first
-
-    let currentStreak = 0;
-    for (let i = sessionDates.length; i++;) {
-      const expectedDate = new Date(new Date(today) - currentStreak * 86400000).toISOString().slice(0, 10);
-      if (sessionDates[i] === expectedDate) {
-        currentStreak++;
-      } else {
-        break;
-      }
-    }
-    setStreak(currentStreak);
-  }, [sessions]);
-
 
   // Filter sessions by date range
   const filteredSessions = sessions.filter(session => {
