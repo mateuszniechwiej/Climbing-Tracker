@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import climbingLogo from './assets/climbing.png'
 import AddSession from './components/AddSession'
 import SessionList from './components/SessionList'
 import Stats from './components/Stats';
@@ -35,24 +36,48 @@ function App() {
   const handleEdit = (session) => {
     setEditSession(session);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-  return (
-    <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Climbing Tracker</h1>
-      <p className="mb-4">Total: {sessions.length}</p>
+  };
 
-      <AddSession onAdd={handleAddSession} onUpdate={updateSession} editSession={editSession} onCancelEdit={() => setEditSession(null)} />
-      <Stats sessions={sessions} saveSession={saveSession} updateSession={updateSession} />
-      <SessionList 
-        sessions={filteredSessions} 
-        allSessions={sessions} 
-        onDelete={deleteSession} 
-        onEdit={handleEdit} 
-        filter={handleSelectedColor} 
-        selectedColor={selectedColor}
-        onColorFilter={setSelectedColor} 
-         />
-      
+  return (
+    <div className="min-h-screen bg-gray-100 w-full">
+      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div className="flex w-full items-center justify-between gap-3 px-4 py-3">
+          <div className="flex items-center gap-2">
+            <img src={climbingLogo} alt="Climbing logo" className="h-8 w-8 rounded-full object-cover" />
+            <div>
+              <p className="text-sm font-semibold text-slate-900">Climbing Tracker</p>
+              <p className="text-[11px] text-slate-500">Total sessions: {sessions.length}</p>
+            </div>
+          </div>
+          <nav className="flex items-center gap-3 text-xs">
+            <a href="#climbs" className="rounded-full px-3 py-1 text-slate-700 transition hover:bg-slate-100">Climbs</a>
+            <a href="#stats" className="rounded-full px-3 py-1 text-slate-700 transition hover:bg-slate-100">Stats</a>
+            <a href="#sessions" className="rounded-full px-3 py-1 text-slate-700 transition hover:bg-slate-100">Sessions</a>
+          </nav>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-lg px-4 py-6">
+        <section id="climbs" className="scroll-mt-24">
+          <AddSession onAdd={handleAddSession} onUpdate={updateSession} editSession={editSession} onCancelEdit={() => setEditSession(null)} />
+        </section>
+
+        <section id="stats" className="scroll-mt-24 mt-8">
+          <Stats sessions={sessions} saveSession={saveSession} updateSession={updateSession} />
+        </section>
+
+        <section id="sessions" className="scroll-mt-24 mt-8">
+          <SessionList 
+            sessions={filteredSessions} 
+            allSessions={sessions} 
+            onDelete={deleteSession} 
+            onEdit={handleEdit} 
+            filter={handleSelectedColor} 
+            selectedColor={selectedColor}
+            onColorFilter={setSelectedColor} 
+          />
+        </section>
+      </main>
     </div>
   );
 }
