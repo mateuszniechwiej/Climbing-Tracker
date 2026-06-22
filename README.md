@@ -46,3 +46,7 @@ npm run deploy
 vercel - 
 ```bash
 vercel --prod
+```
+
+## Attribution
+Climbing icon by [Freepik](https://www.flaticon.com/free-icons/climbing) from [Flaticon](https://www.flaticon.com/).
