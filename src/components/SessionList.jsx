@@ -24,7 +24,7 @@ export default function SessionList({ sessions, allSessions, onDelete, onEdit, s
      <select
         value={selectedColor ?? ""}
         onChange={(e) => onColorFilter(e.target.value || null)}
-        className="mb-4 p-2 border border-gray-300 rounded-md"
+        className="mb-4 w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
     >
         <option value="">All Sessions</option>
         {uniqueColors.map(color => (

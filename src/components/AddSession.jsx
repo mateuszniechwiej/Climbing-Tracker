@@ -108,7 +108,7 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
               <select
                 value={climb.color}
                 onChange={(e) => updateClimb(index, 'color', e.target.value)}
-                className="w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+                className="w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
                 required
               >
                 <option value="">Select Color</option>
@@ -122,7 +122,7 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
               <select
                 value={climb.gradeDifficulty}
                 onChange={(e) => updateClimb(index, 'gradeDifficulty', e.target.value)}
-                className="w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+                className="w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
                 required
               >
                 <option value="">Select Difficulty</option>
@@ -137,7 +137,7 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
                 type="number"
                 value={climb.count}
                 onChange={(e) => updateClimb(index, 'count', e.target.value)}
-                className="w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+                className="w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
                 required
               />
             </div>
@@ -170,7 +170,8 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
           id="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          onClick={(e) => e.currentTarget.showPicker?.()}
+          className="mt-1 block w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
           required
         />
       </div>
@@ -183,7 +184,7 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
           <select
             value={formData.durationHrs}
             onChange={(e) => setFormData({ ...formData, durationHrs: e.target.value })}
-            className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+            className="flex-1 rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
             required
           >
             <option value="">--</option>
@@ -192,7 +193,7 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
           <select
             value={formData.durationMins}
             onChange={(e) => setFormData({ ...formData, durationMins: e.target.value })}
-            className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+            className="flex-1 rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
             required
           >
             <option value="">--</option>
@@ -209,7 +210,8 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
           id="notes"
           value={formData.notes}
           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+          rows={4}
         />
       </div>
 

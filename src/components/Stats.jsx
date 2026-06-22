@@ -91,7 +91,8 @@ export default function Stats({ sessions, saveSession }) {
                 id="startDate"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                onClick={(e) => e.currentTarget.showPicker?.()}
+                className="w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
               />
             </div>
             <div className="flex-1">
@@ -101,7 +102,8 @@ export default function Stats({ sessions, saveSession }) {
                 id="endDate"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                onClick={(e) => e.currentTarget.showPicker?.()}
+                className="w-full rounded-l border border-gray-300 bg-white px-4 py-3 text-base shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
               />
             </div>
           </div>
@@ -170,14 +172,14 @@ export default function Stats({ sessions, saveSession }) {
         )}
       </div>
       <div className="mt-4 flex gap-3 justify-center">
-        <label className="cursor-pointer px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2">
+        <label className="cursor-pointer px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-l shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2">
           <Download size={16} />
           Import Sessions(Csv)
           <input type="file" accept=".csv" className="hidden" onChange={(e) => importCsv(e.target.files[0])} />
         </label>
         <button
           onClick={exportCsv}
-          className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2"
+          className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-l shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2"
         >
           <Upload size={16} />
           Export Sessions(Csv)
