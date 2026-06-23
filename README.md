@@ -55,6 +55,23 @@ Run ESLint across the source files:
 npm run lint
 ```
 
+## Playwright E2E
+End-to-end tests are defined under `tests/e2e` and use `playwright.config.js`.
+
+Install browser dependencies once:
+```bash
+npx playwright install --with-deps
+```
+Run the full Playwright suite:
+```bash
+npx playwright test
+```
+
+## CI workflows
+There are two GitHub Actions workflows:
+- `.github/workflows/ci.yml`: runs lint and unit tests using `npm test -- --run`
+- `.github/workflows/playwright.yml`: runs Playwright E2E tests with browser installation and uploads the `playwright-report/` artifact
+
 ## Deployment
 github - 
 ```bash 
@@ -65,6 +82,7 @@ vercel -
 ```bash
 vercel --prod
 ```
+![CI](https://github.com/mateuszniechwiej/Climbing-Tracker/actions/workflows/ci.yml/badge.svg)
 
 ## Attribution
 Climbing icon by [Freepik](https://www.flaticon.com/free-icons/climbing) from [Flaticon](https://www.flaticon.com/).
