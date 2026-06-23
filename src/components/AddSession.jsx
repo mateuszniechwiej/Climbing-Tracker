@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Plus, X, Save, Edit3 } from 'lucide-react';
 
 export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit }) {
 
@@ -93,7 +94,9 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
     <form onSubmit={handleSubmit} className="space-y-4">
       {isEditing && (
       <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg flex items-center justify-between">
-        <span className="text-blue-700 font-medium text-sm">✏️ Editing session — {editSession.date}</span>
+        <span className="text-blue-700 font-medium text-sm flex items-center gap-2">
+          <Edit3 size={16} /> Editing session — {editSession.date}
+        </span>
       </div>
     )}
       <div>
@@ -146,7 +149,7 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
                 onClick={() => removeClimb(index)}
                 className="px-2 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded"
               >
-                ✕
+                <X size={16} />
               </button>
             )}
           </div>
@@ -154,9 +157,9 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
         <button
           type="button"
           onClick={addClimb}
-          className="px-3 py-1 bg-green-100 hover:bg-green-200 text-green-700 rounded text-sm"
+          className="px-3 py-1 bg-green-100 hover:bg-green-200 text-green-700 rounded text-sm inline-flex items-center gap-2"
         >
-          + Add Climb
+          <Plus size={14} /> Add Climb
         </button>
       </div>
 
@@ -215,12 +218,12 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
       </div>
 
       <div className="flex gap-2">
-        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-medium">
-          {isEditing ? 'Update Session' : 'Add Session'}
+        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-medium inline-flex items-center gap-2">
+          {isEditing ? <><Save size={16} /> Update Session</> : <><Plus size={16} /> Add Session</>}
         </button>
         {isEditing && (
-          <button type="button" onClick={onCancelEdit} className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded font-medium">
-            Cancel
+          <button type="button" onClick={onCancelEdit} className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded font-medium inline-flex items-center gap-2">
+            <X size={16} /> Cancel
           </button>
         )}
       </div>
