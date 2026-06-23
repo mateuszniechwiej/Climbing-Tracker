@@ -37,6 +37,24 @@ npm i # npm install
 npm run dev -- --host
 ```
 
+## Testing & Linting
+Run unit tests with Vitest:
+```bash
+npm test
+```
+Open the Vitest UI for an interactive test runner:
+```bash
+npm run test:ui
+```
+Run test coverage:
+```bash
+npm run test:coverage
+```
+Run ESLint across the source files:
+```bash
+npm run lint
+```
+
 ## Deployment
 github - 
 ```bash 
