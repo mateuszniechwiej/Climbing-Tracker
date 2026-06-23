@@ -1,4 +1,6 @@
 # Climbing Tracker
+![CI](https://github.com/mateuszniechwiej/Climbing-Tracker/actions/workflows/ci.yml/badge.svg)
+
 Personal React app to log indoor sessions (grades, dates), track progress. Built to master hooks while serving my gym routine.
 
 ## Status
