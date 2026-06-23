@@ -1,5 +1,7 @@
 import { Pencil, Trash2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+
 export default function SessionList({ sessions, allSessions, onDelete, onEdit, selectedColor, onColorFilter }) {
 
   const listRef = useRef(null);
@@ -69,3 +71,23 @@ export default function SessionList({ sessions, allSessions, onDelete, onEdit, s
     </div>
   );
 }
+
+SessionList.propTypes = {
+  sessions: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    climbs: PropTypes.arrayOf(PropTypes.shape({
+      color: PropTypes.string,
+      gradeDifficulty: PropTypes.string,
+      count: PropTypes.string,
+    })),
+    notes: PropTypes.string,
+  })).isRequired,
+  allSessions: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  selectedColor: PropTypes.string,
+  onColorFilter: PropTypes.func.isRequired,
+};
+

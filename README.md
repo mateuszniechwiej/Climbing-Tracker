@@ -1,4 +1,5 @@
 # Climbing Tracker
+
 ![CI](https://github.com/mateuszniechwiej/Climbing-Tracker/actions/workflows/ci.yml/badge.svg)
 
 Personal React app to log indoor sessions (grades, dates), track progress. Built to master hooks while serving my gym routine.
@@ -32,6 +33,11 @@ src/
 | 7 | Delete session button | ✅ Done |
 | 8 | CSV export and import| ✅ Done |
 | 9 | Edit sessions | ✅ Done |
+| 10 | Unit tests (Vitest) | ✅ Done |
+| 11 | E2E tests (Playwright) | ✅ Done |
+| 12 | ESLint + react-hooks rules | ✅ Done |
+| 13 | GitHub Actions CI | ✅ Done |
+| 14 | PropTypes validation | ✅ Done |
 
 ## Local Setup
 ```bash

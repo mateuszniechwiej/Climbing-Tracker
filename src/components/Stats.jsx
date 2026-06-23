@@ -3,6 +3,7 @@ import useCsvExport from '../hooks/useCsvExport';
 import useCsvImport from '../hooks/useCsvImport';
 import useClimbingStats from '../hooks/useClimbingStats';
 import { Download, Upload } from 'lucide-react';
+import PropTypes from 'prop-types';
 
 
 export default function Stats({ sessions, saveSession }) {
@@ -189,3 +190,18 @@ export default function Stats({ sessions, saveSession }) {
     </div>
   );
 }
+
+Stats.propTypes = {
+  sessions: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    climbs: PropTypes.arrayOf(PropTypes.shape({
+      color: PropTypes.string,
+      gradeDifficulty: PropTypes.string,
+      count: PropTypes.string,
+    })),
+    notes: PropTypes.string,
+  })).isRequired,
+  saveSession: PropTypes.func.isRequired,
+};

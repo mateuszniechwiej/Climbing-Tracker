@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Plus, X, Save, Edit3 } from 'lucide-react';
+import PropTypes from 'prop-types';
 
 export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit }) {
 
@@ -212,5 +213,25 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
     </div>
   );
 }
+
+// PropTypes
+const climbShape = PropTypes.shape({
+  color: PropTypes.string,
+  gradeDifficulty: PropTypes.string,
+  count: PropTypes.string,
+});
+
+AddSession.propTypes = {
+  onAdd: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  editSession: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    climbs: PropTypes.arrayOf(climbShape),
+    notes: PropTypes.string,
+  }),
+  onCancelEdit: PropTypes.func.isRequired,
+};
 
 
