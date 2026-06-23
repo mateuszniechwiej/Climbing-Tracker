@@ -21,7 +21,6 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
   );
 
   useEffect(() => {
-    console.log('editSession changed:', editSession);
     if (editSession) {
       setFormData({
         climbs: editSession.climbs,

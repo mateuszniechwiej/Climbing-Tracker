@@ -18,7 +18,7 @@ export default function usePersistentSessions() {
             const data = await db.getAll('sessions');
             setSessions(data);
         } catch (error) {
-            console.log('DB init skipped (dev env)');
+            console.error('Failed to initialize IndexedDB. Persistence is disabled for the current environment.', error);
         }
     }
 
@@ -29,7 +29,7 @@ export default function usePersistentSessions() {
             await db.add('sessions', newSession);
             setSessions(prev => [...prev, newSession]);
         } catch (error) {
-            console.log('Save skipped (dev)');
+            console.error('Unable to save session. Persistence is unavailable in this environment.', error);
         }
     };
 
@@ -39,7 +39,7 @@ export default function usePersistentSessions() {
             await db.delete('sessions', id);
             setSessions(prev => prev.filter(s => s.id !== id));
         } catch (error) {
-            console.log('Delete skipped (dev)');
+            console.error('Unable to delete session. Persistence is unavailable in this environment.', error);
         }
     };
 
@@ -49,7 +49,7 @@ export default function usePersistentSessions() {
             await db.put('sessions', updatedSession);
             setSessions(prev => prev.map(s => s.id === updatedSession.id ? updatedSession : s));
         } catch (error) {
-            console.log('Update skipped (dev)');
+            console.error('Unable to update session. Persistence is unavailable in this environment.', error);
         }
     };
         
