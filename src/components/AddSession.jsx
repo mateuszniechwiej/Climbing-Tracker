@@ -1,45 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Plus, X, Save, Edit3 } from 'lucide-react';
 
 export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit }) {
 
   const isEditing = !!editSession;
+  const formKey = editSession?.id ?? 'new';
 
-  const [formData, setFormData] = useState(
-    editSession ? {
-      climbs: editSession.climbs,
-      date: editSession.date,
-      durationHrs: Math.floor(editSession.duration / 60).toString(),
-      durationMins: (editSession.duration % 60).toString().padStart(2, '0'),
-      notes: editSession.notes || ''
-    } : {
-      climbs: [{ color: '', gradeDifficulty: '', count: '' }],
-      date: '',
-      durationHrs: '',
-      durationMins: '',
-      notes: ''
-    }
-  );
+  const initialFormData = editSession ? {
+    climbs: editSession.climbs,
+    date: editSession.date,
+    durationHrs: Math.floor(editSession.duration / 60).toString(),
+    durationMins: (editSession.duration % 60).toString().padStart(2, '0'),
+    notes: editSession.notes || ''
+  } : {
+    climbs: [{ color: '', gradeDifficulty: '', count: '' }],
+    date: '',
+    durationHrs: '',
+    durationMins: '',
+    notes: ''
+  };
 
-  useEffect(() => {
-    if (editSession) {
-      setFormData({
-        climbs: editSession.climbs,
-        date: editSession.date,
-        durationHrs: Math.floor(editSession.duration / 60).toString(),
-        durationMins: (editSession.duration % 60).toString().padStart(2, '0'),
-        notes: editSession.notes || ''
-      });
-    } else {
-      setFormData({
-        climbs: [{ color: '', gradeDifficulty: '', count: '' }],
-        date: '',
-        durationHrs: '',
-        durationMins: '',
-        notes: ''
-      });
-    }
-  }, [editSession]);
+  const [formData, setFormData] = useState(() => initialFormData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,7 +72,7 @@ export default function AddSession({ onAdd, onUpdate, editSession, onCancelEdit 
 
   return (
     <div className={isEditing ? "border-2 border-blue-400 rounded-xl p-4" : ""}>
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form key={formKey} onSubmit={handleSubmit} className="space-y-4">
       {isEditing && (
       <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg flex items-center justify-between">
         <span className="text-blue-700 font-medium text-sm flex items-center gap-2">

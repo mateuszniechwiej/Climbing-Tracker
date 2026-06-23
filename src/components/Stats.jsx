@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useCsvExport from '../hooks/useCsvExport';
 import useCsvImport from '../hooks/useCsvImport';
 import useClimbingStats from '../hooks/useClimbingStats';
@@ -11,7 +11,6 @@ export default function Stats({ sessions, saveSession }) {
   const { exportCsv } = useCsvExport(sessions);
   const { importCsv } = useCsvImport(saveSession);
   const { streak } = useClimbingStats(sessions);
-  const today = new Date().toISOString().slice(0, 10);
 
   // Filter sessions by date range
   const filteredSessions = sessions.filter(session => {

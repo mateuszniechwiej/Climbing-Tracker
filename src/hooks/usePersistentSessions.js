@@ -1,26 +1,34 @@
-import React, { useState, useEffect } from 'react';  // ✅ ADD React
+import { useState, useEffect } from 'react';
 import { openDB } from 'idb';
 
 export default function usePersistentSessions() {
     const [sessions, setSessions] = useState([]);
 
     useEffect(() => {
-        initDB();
-    }, []);
+        let active = true;
 
-    async function initDB() {
-        try {
-            const db = await openDB('ClimbTracker', 1, {
-                upgrade(db) {
-                    db.createObjectStore('sessions', { keyPath: 'id' });
+        async function initDB() {
+            try {
+                const db = await openDB('ClimbTracker', 1, {
+                    upgrade(db) {
+                        db.createObjectStore('sessions', { keyPath: 'id' });
+                    }
+                });
+                const data = await db.getAll('sessions');
+                if (active) {
+                    setSessions(data);
                 }
-            });
-            const data = await db.getAll('sessions');
-            setSessions(data);
-        } catch (error) {
-            console.error('Failed to initialize IndexedDB. Persistence is disabled for the current environment.', error);
+            } catch (error) {
+                console.error('Failed to initialize IndexedDB. Persistence is disabled for the current environment.', error);
+            }
         }
-    }
+
+        initDB();
+
+        return () => {
+            active = false;
+        };
+    }, []);
 
     const saveSession = async (session) => {
         try {
