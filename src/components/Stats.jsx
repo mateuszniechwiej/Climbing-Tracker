@@ -171,18 +171,19 @@ export default function Stats({ sessions, saveSession }) {
           <p className="text-sm text-gray-500">No sessions in selected range</p>
         )}
       </div>
-      <div className="mt-4 flex gap-3 justify-center">
-        <label className="cursor-pointer px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-l shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2">
+      <div className="mt-4 flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
+        <label className="cursor-pointer w-full sm:w-auto min-w-[160px] px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"
+        >
           <Download size={16} />
-          Import Sessions(Csv)
+          Import Sessions (CSV)
           <input type="file" accept=".csv" className="hidden" onChange={(e) => importCsv(e.target.files[0])} />
         </label>
         <button
           onClick={exportCsv}
-          className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-l shadow-lg hover:shadow-xl transition-all text-sm flex items-center gap-2"
+          className="w-full sm:w-auto min-w-[160px] px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"
         >
           <Upload size={16} />
-          Export Sessions(Csv)
+          Export Sessions (CSV)
         </button>
       </div>
 
