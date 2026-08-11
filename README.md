@@ -14,6 +14,7 @@ Personal React app to log indoor sessions (grades, dates), track progress. Built
 - **GitHub Repository**: https://github.com/mateuszniechwiej/Climbing-Tracker
 
 ## File Structure
+```text
 src/
 ├── components/
 │ ├── AddSession.jsx # Form inputs
@@ -22,6 +23,7 @@ src/
 ├── App.jsx # State hub
 ├── index.css # Tailwind
 └── main.jsx
+```
 
 ## Features Plan
 | Step | Feature | Status |
